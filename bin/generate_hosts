@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+# encoding: UTF-8
+
+cap_dir = '/root/cap_chef'
+require File.expand_path("#{cap_dir}/config/aws_config")
+
+require 'net/http'
+require 'net/ssh'
+require 'net/ssh/proxy/command'
+require 'ap'
+
+ec2 = AWS::EC2.new
+ec2 = ec2.regions['hoge']
+filename = "#{cap_dir}/cookbooks/etc_hosts/templates/default/hosts.erb"
+
+File.open(filename, 'w') do |f|
+  f.puts "127.0.0.1   localhost localhost.localdomain"
+  ec2.instances.select {|i| i.status != :terminated }.map do |i|
+    next unless i.tags.to_h["hostname_sqmple"]
+    puts "#{i.private_ip_address} #{i.tags.to_h["hostname_sample"]}"
+    f.puts "#{i.private_ip_address} #{i.tags.to_h["hostname_sample"]}"
+  end
+end
+
+

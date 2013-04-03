@@ -1,0 +1,6 @@
+*~
+config/solo.rb
+config/hosts_sync.rb
+cookbooks/etc_hosts/templates/default/hosts.erb
+config/self.json
+

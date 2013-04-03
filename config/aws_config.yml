@@ -1,0 +1,8 @@
+# Fill in your AWS Access Key ID and Secret Access Key
+# http://aws.amazon.com/security-credentials
+# group aws_setup
+# user setup
+access_key_id: ''
+secret_access_key: ''
+
+
